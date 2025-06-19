@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All N 1 Car Care - Your Premier Auto Service</title>
+    <!-- Load Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Inter Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Base styles for the entire body */
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #1a202c; /* Dark charcoal for main background */
+            color: #e2e8f0; /* Light gray text for readability on dark */
+            scroll-behavior: smooth; /* Smooth scrolling for internal links */
+        }
+        /* Container for content width */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Navigation Link Styling */
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+            padding-bottom: 0.5rem; /* Space for underline */
+            color: #cbd5e1; /* Default link color */
+        }
+        /* Underline effect for active/hover states */
+        .nav-link.active::after,
+        .nav-link:hover::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #6366f1; /* Indigo for highlight */
+            transform: scaleX(1);
+            transform-origin: bottom center;
+            transition: transform 0.3s ease;
+        }
+        .nav-link:not(.active)::after {
+            transform: scaleX(0); /* Hide on non-active */
+        }
+        .nav-link.active {
+            font-weight: 600;
+            color: #ffffff; /* White for active link text */
+        }
+        .nav-link:hover {
+            color: #a0aec0; /* Lighter gray on hover */
+        }
+
+        /* Page content visibility management */
+        .page-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .page-content.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Accordion Header Styling */
+        .accordion-header {
+            cursor: pointer;
+            user-select: none;
+            transition: background-color 0.2s ease;
+        }
+        .accordion-header:hover {
+            background-color: #2d3748; /* Darker hover for professionalism */
+        }
+        .accordion-header.active .arrow-icon {
+            transform: rotate(180deg);
+        }
+        .arrow-icon {
+            transition: transform 0.3s ease;
+        }
+        /* Accordion content hidden by default with smooth transition */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out, opacity 0.4s ease-in-out;
+            opacity: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        /* Button styling improvements */
+        .btn-primary {
+            @apply bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-0.5;
+        }
+        .btn-secondary {
+            @apply bg-gray-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-gray-600 transition duration-300 ease-in-out transform hover:-translate-y-0.5;
+        }
+
+        /* Subtle animation for elements */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in-down { animation: fadeInDown 0.8s ease-out forwards; }
+        .animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
+    </style>
+</head>
+<body class="bg-gray-950 text-gray-100">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-gray-900 text-white p-4 shadow-xl sticky top-0 z-50">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+            <!-- Logo and Site Title -->
+            <div class="flex items-center mb-4 md:mb-0">
+                <img src="{{uploaded:aiease_1750189358099.jpg-58d10f12-8bcb-4c55-bba1-be15f2c63e74}}" alt="All N 1 Car Care Logo" class="rounded-full mr-3 shadow-md border border-gray-700 w-12 h-12 object-cover">
+                <span class="text-3xl font-extrabold text-indigo-300">All N 1 Car Care</span>
+            </div>
+            <!-- Navigation Links -->
+            <div class="flex flex-wrap justify-center space-x-6">
+                <a href="#home" class="nav-link text-lg" data-page="home">Home</a>
+                <a href="#services" class="nav-link text-lg" data-page="services">Services</a>
+                <a href="#about" class="nav-link text-lg" data-page="about">About Us</a>
+                <a href="#contact" class="nav-link text-lg" data-page="contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area - All sections are here, hidden by default -->
+    <main id="app" class="pt-8 pb-16 container">
+
+        <!-- Home Page Content -->
+        <section id="home-page" class="page-content active">
+            <div class="relative bg-cover bg-center h-[550px] rounded-2xl shadow-2xl flex items-center justify-center text-white p-8 overflow-hidden"
+                 style="background-image: url('{{uploaded:image_89aa03.jpg-1fb922de-b7dc-476d-8024-f8cb13b8c7a4}}'); background-position: center 30%;">
+                <div class="absolute inset-0 bg-gradient-to-br from-gray-900 to-indigo-900 opacity-80 rounded-2xl"></div>
+                <div class="relative text-center max-w-4xl mx-auto">
+                    <h1 class="text-6xl font-extrabold mb-4 drop-shadow-xl animate-fade-in-down">
+                        Your Trusted Partner in Car Care
+                    </h1>
+                    <p class="text-2xl mb-10 leading-relaxed font-light opacity-90 animate-fade-in-up">
+                        Locally owned for over a decade, we combine generations of expertise with a commitment to honest, reliable service for your vehicle.
+                    </p>
+                    <button class="btn-primary" data-nav-to="about">
+                        Learn more about us &rarr;
+                    </button>
+                    <div class="mt-16 flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-8 text-lg font-bold">
+                        <span class="bg-green-600 text-white py-3 px-8 rounded-full shadow-lg">OPEN NOW</span>
+                        <span class="bg-blue-600 text-white py-3 px-8 rounded-full shadow-lg">AUTO SERVICE CENTER</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Enhanced Features Section -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
+                <!-- Card 1: Expertise -->
+                <div class="bg-gray-800 rounded-xl shadow-lg p-7 text-center border border-gray-700 transform hover:scale-102 transition duration-300">
+                    <div class="w-20 h-20 bg-indigo-500 rounded-full flex items-center justify-center mx-auto mb-5 shadow-md">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-2">Expertise You Can Trust</h3>
+                    <p class="text-gray-300 text-base">Our lead mechanic boasts 30 years of hands-on experience, ensuring top-notch service for every vehicle.</p>
+                </div>
+                <!-- Card 2: Family Owned -->
+                <div class="bg-gray-800 rounded-xl shadow-lg p-7 text-center border border-gray-700 transform hover:scale-102 transition duration-300">
+                    <div class="w-20 h-20 bg-emerald-500 rounded-full flex items-center justify-center mx-auto mb-5 shadow-md">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h-2V10h2m-6 10H9V4h2m-6 16H3V6h2m14 0h-2V4h2m-6 16H9V4h2m-6 16H3V6h2"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-2">Family Owned & Operated</h3>
+                    <p class="text-gray-300 text-base">We treat every customer like family, committed to integrity, quality, and lasting relationships.</p>
+                </div>
+                <!-- Card 3: Advanced Tech -->
+                <div class="bg-gray-800 rounded-xl shadow-lg p-7 text-center border border-gray-700 transform hover:scale-102 transition duration-300">
+                    <div class="w-20 h-20 bg-amber-500 rounded-full flex items-center justify-center mx-auto mb-5 shadow-md">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 7h14a2 2 0 002-2V3a2 2 0 00-2-2H5a2 2 0 00-2 2v2a2 2 0 002 2zm0 14h14a2 2 0 002-2v-2a2 2 0 00-2-2H5a2 2 0 00-2 2v2a2 2 0 002 2zm0-7h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2 2v2a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-2">Advanced Diagnostics</h3>
+                    <p class="text-gray-300 text-base">Leveraging cutting-edge tools to diagnose and fix problems efficiently, saving you time and money.</p>
+                </div>
+            </div>
+
+            <!-- Section: Meet Our Team -->
+            <div class="mt-16 bg-gray-800 rounded-2xl shadow-xl p-8 grid grid-cols-1 md:grid-cols-2 gap-12 items-center border border-gray-700">
+                <div class="order-2 md:order-1">
+                    <img src="https://images.unsplash.com/photo-1582213782179-e0d057a6e114?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Professional Mechanics" class="rounded-xl shadow-lg w-full h-auto object-cover border border-gray-600">
+                </div>
+                <div class="order-1 md:order-2">
+                    <h2 class="text-4xl font-bold text-white mb-4">Meet Our Dedicated Team</h2>
+                    <p class="text-lg text-gray-300 leading-relaxed">
+                        Our team of certified mechanics is passionate about cars and committed to providing the highest level of service. With continuous training and a customer-first approach, we ensure every repair is done right the first time.
+                    </p>
+                    <button class="btn-primary mt-6" data-nav-to="about">
+                        More About Our Team
+                    </button>
+                </div>
+            </div>
+
+            <!-- Call to Action Section -->
+            <div class="mt-16 bg-gradient-to-r from-gray-900 to-gray-800 text-white p-12 rounded-2xl shadow-2xl flex flex-col md:flex-row items-center justify-between">
+                <div class="md:w-2/3 text-center md:text-left mb-8 md:mb-0">
+                    <h2 class="text-4xl font-bold mb-4">Ready for top-notch auto care?</h2>
+                    <p class="text-xl font-light opacity-90">Get in touch with us today for any questions or to schedule an appointment!</p>
+                </div>
+                <div class="md:w-1/3 text-center md:text-right">
+                    <button class="btn-secondary" data-nav-to="contact">
+                        Schedule Service
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Page Content -->
+        <section id="services-page" class="page-content">
+            <h1 class="text-4xl font-bold text-white mb-8 text-center">Our Comprehensive Services</h1>
+
+            <p class="text-center text-lg text-gray-300 mb-12 max-w-2xl mx-auto">
+                At All N 1 Car Care, we offer a comprehensive range of services to keep your vehicle in peak condition.
+                From routine maintenance to complex diagnostics, we've got you covered with expert care.
+            </p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                <!-- Left Column for Service Categories (Accordion) -->
+                <div>
+                    <div class="bg-gray-800 rounded-2xl shadow-xl p-7 mb-8 border border-gray-700">
+                        <img src="{{uploaded:image_89aa22.jpg-e71b85ad-a01a-4088-93d0-1ff77344e060}}" alt="Car engine being worked on" class="rounded-xl mb-6 w-full h-64 object-cover shadow-md border border-gray-600">
+                        <h2 class="text-3xl font-bold text-white mb-5">Find The Service You Need</h2>
+
+                        <!-- Accordion for Services -->
+                        <div class="accordion-group space-y-4">
+                            <!-- Heating & Cooling -->
+                            <div class="border border-gray-700 rounded-lg overflow-hidden">
+                                <div class="accordion-header bg-gray-700 p-4 flex justify-between items-center text-lg font-semibold text-white hover:bg-gray-600">
+                                    Heating & Cooling
+                                    <svg class="arrow-icon w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                </div>
+                                <div class="accordion-content p-4 text-gray-300 leading-relaxed">
+                                    AC Recharging & Repair, Radiator Service, Coolant Flush, Heater Core Repair, Climate Control Diagnostics. We ensure your car's climate system is running efficiently for your comfort.
+                                </div>
+                            </div>
+                            <!-- Engine & Performance -->
+                            <div class="border border-gray-700 rounded-lg overflow-hidden">
+                                <div class="accordion-header bg-gray-700 p-4 flex justify-between items-center text-lg font-semibold text-white hover:bg-gray-600">
+                                    Engine & Performance
+                                    <svg class="arrow-icon w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                </div>
+                                <div class="accordion-content p-4 text-gray-300 leading-relaxed">
+                                    Engine Diagnostics, Check Engine Light Service, Tune-Ups, Fuel System Cleaning, Exhaust Repair, Drivability Issues. Our experts maximize your vehicle's power and efficiency.
+                                </div>
+                            </div>
+                            <!-- Electrical Systems -->
+                            <div class="border border-gray-700 rounded-lg overflow-hidden">
+                                <div class="accordion-header bg-gray-700 p-4 flex justify-between items-center text-lg font-semibold text-white hover:bg-gray-600">
+                                    Electrical Systems
+                                    <svg class="arrow-icon w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                </div>
+                                <div class="accordion-content p-4 text-gray-300 leading-relaxed">
+                                    Alternator & Starter Repair, Battery Replacement, Wiring Diagnostics, Power Window/Lock Repair. We meticulously check and fix all electrical components for flawless operation.
+                                </div>
+                            </div>
+                            <!-- Brakes & Suspension -->
+                            <div class="border border-gray-700 rounded-lg overflow-hidden">
+                                <div class="accordion-header bg-gray-700 p-4 flex justify-between items-center text-lg font-semibold text-white hover:bg-gray-600">
+                                    Brakes & Suspension
+                                    <svg class="arrow-icon w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                </div>
+                                <div class="accordion-content p-4 text-gray-300 leading-relaxed">
+                                    Brake Inspections & Repair, Pad & Rotor Replacement, ABS System Service, Shock & Strut Replacement. We ensure your safety and comfort with precision brake and suspension services.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column for Detailed Service Descriptions -->
+                <div>
+                    <!-- Brakes Service Card -->
+                    <div class="bg-gray-800 rounded-2xl shadow-xl p-7 mb-8 border border-gray-700">
+                        <img src="https://images.unsplash.com/photo-1579730510526-0e31c713b185?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Car brake disc and caliper" class="rounded-xl mb-6 w-full h-64 object-cover shadow-md border border-gray-600">
+                        <h3 class="text-2xl font-bold text-white mb-3">Brake Services</h3>
+                        <p class="text-gray-300 text-base leading-relaxed">From routine brake inspections and pad replacements to rotor resurfacing/replacement, we handle it all with precision and care. We'll get you stopping safely and confidently every time. Our comprehensive brake services include expert diagnostics, brake pad and rotor replacement, and fluid flushes.</p>
+                    </div>
+
+                    <!-- Suspension Service Card -->
+                    <div class="bg-gray-800 rounded-2xl shadow-xl p-7 mb-8 border border-gray-700">
+                        <img src="https://images.unsplash.com/photo-1549420556-a1975e8105d1?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Car suspension system" class="rounded-xl mb-6 w-full h-64 object-cover shadow-md border border-gray-600">
+                        <h3 class="text-2xl font-bold text-white mb-3">Suspension System Repair</h3>
+                        <p class="text-gray-300 text-base leading-relaxed">Our 30 years of experience ensure we accurately diagnose and expertly repair issues with your shocks, struts, springs, and steering components. Whether you're experiencing a bumpy ride, uneven tire wear, or strange noises, we'll get your suspension working perfectly, giving you a safe and comfortable driving experience.</p>
+                    </div>
+
+                    <!-- Tune-Ups Service Card -->
+                    <div class="bg-gray-800 rounded-2xl shadow-xl p-7 mb-8 border border-gray-700">
+                        <img src="https://images.unsplash.com/photo-1581452906161-e0c25a81e3a6?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Mechanic doing a car tune-up" class="rounded-xl mb-6 w-full h-64 object-cover shadow-md border border-gray-600">
+                        <h3 class="text-2xl font-bold text-white mb-3">Precision Tune-Ups</h3>
+                        <p class="text-gray-300 text-base leading-relaxed">Our lead mechanic will precisely adjust and inspect key components, from spark plugs to fluid levels, optimizing your engine's performance, fuel efficiency, and longevity. A regular tune-up at All N 1 Car Care ensures your vehicle runs smoothly and reliably for miles to come.</p>
+                    </div>
+
+                    <!-- General Service Card -->
+                    <div class="bg-gray-800 rounded-2xl shadow-xl p-7 mb-8 border border-gray-700">
+                        <img src="https://images.unsplash.com/photo-1502877338535-766e11dd2d3d?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Generic car service scene" class="rounded-xl mb-6 w-full h-64 object-cover shadow-md border border-gray-600">
+                        <h3 class="text-2xl font-bold text-white mb-3">General Vehicle Maintenance</h3>
+                        <p class="text-gray-300 text-base leading-relaxed">Our mechanic also handles a wide range of essential needs, including oil changes, fluid checks, tire rotations, and comprehensive vehicle inspections. We ensure all vital systems are functioning correctly, providing peace of mind and preventing future, costly repairs with proactive care.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- What to do next section -->
+            <div class="bg-gradient-to-r from-blue-800 to-indigo-800 text-white rounded-2xl shadow-2xl p-10 mt-16 text-center">
+                <h2 class="text-3xl font-bold mb-4">Ready for top-notch auto care?</h2>
+                <p class="text-xl font-light opacity-90 mb-8">Get in touch with All N 1 Car Care today with any questions you have. We're here to help keep your vehicle running its best.</p>
+                <button class="btn-secondary" data-nav-to="contact">
+                    Contact us &rarr;
+                </button>
+            </div>
+        </section>
+
+        <!-- About Us Page Content -->
+        <section id="about-page" class="page-content">
+            <h1 class="text-4xl font-bold text-white mb-8 text-center">About Us</h1>
+
+            <div class="bg-gray-800 rounded-2xl shadow-xl p-8 mb-12 border border-gray-700">
+                <p class="text-lg text-gray-300 leading-relaxed mb-6">Welcome to All N 1 Car Care! We are a mechanic shop that has been serving the community for the past 10 years. At All N 1 Car Care, we specialize in a wide range of services, from basic maintenance and repairs to more complex issues.</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h2 class="text-3xl font-bold text-white mb-4">WHO WE ARE</h2>
+                        <p class="text-gray-300 leading-relaxed">For over a decade, our family-owned and operated auto shop has been a cornerstone of the community, providing reliable and honest car care. With a lead mechanic boasting 30 years of hands-on experience, we combine seasoned expertise with a friendly, neighborhood approach, ensuring your vehicle always gets the best service right here at home.</p>
+                    </div>
+                    <div class="flex justify-center">
+                        <img src="{{uploaded:image_89ad87.png-0633c1be-cddd-4018-aff7-1149c80fd99e}}" alt="Our Team" class="rounded-xl shadow-lg w-full h-auto object-cover border border-gray-600">
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-800 rounded-2xl shadow-xl p-8 mb-12 border border-gray-700">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div class="md:order-2">
+                        <h2 class="text-3xl font-bold text-white mb-4">WHAT WE DO</h2>
+                        <p class="text-gray-300 leading-relaxed">At our shop, we're dedicated to providing comprehensive automotive services to keep your vehicle running smoothly and safely. From routine maintenance like oil changes and tire rotations to more complex diagnostics and repairs for engines, transmissions, brakes, and electrical systems, we handle it all.</p>
+                    </div>
+                    <div class="md:order-1 flex justify-center">
+                        <img src="{{uploaded:image_89adbd.jpg-5f168129-6386-44c6-b9e6-1251261cad80}}" alt="Garage Interior" class="rounded-xl shadow-lg w-full h-auto object-cover border border-gray-600">
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-800 rounded-2xl shadow-xl p-8 border border-gray-700">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h2 class="text-3xl font-bold text-white mb-4">Family Owned & Operated</h2>
+                        <p class="text-gray-300 leading-relaxed">At All N 1 Car Care, we're proud to be a family-owned and operated business. This means every service we perform is backed by our personal commitment to integrity, quality, and building lasting relationships with our customers. When you choose us, you're not just a client; you're part of our extended family.</p>
+                    </div>
+                    <div class="flex justify-center">
+                        <img src="{{uploaded:image_89ae00.jpg-7ba1163d-6489-49f8-a6c4-4a1e83d67f73}}" alt="Classic Car in Shop" class="rounded-xl shadow-lg w-full h-auto object-cover border border-gray-600">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Commitment section from image_89ad45.png -->
+            <div class="bg-gradient-to-r from-blue-800 to-indigo-800 text-white rounded-2xl shadow-2xl p-10 mt-16 flex flex-col md:flex-row items-center justify-between">
+                <div class="md:w-2/3 text-center md:text-left mb-8 md:mb-0">
+                    <h2 class="text-4xl font-bold mb-4">Setting New Standards in Auto Repair</h2>
+                    <p class="text-xl font-light opacity-90">We leverage advanced diagnostic tools and cutting-edge techniques, not just to fix problems, but to optimize your vehicle's performance and efficiency. This means your car runs smoother and more reliably.</p>
+                </div>
+                <div class="md:w-1/3 text-center md:text-right">
+                    <img src="{{uploaded:image_89ad45.png-1579cbfc-6074-48a8-9eaf-e66eb5e26685}}" alt="Advanced Diagnostics" class="hidden md:block w-48 h-auto mx-auto rounded-lg shadow-md opacity-75">
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Contact Page Content -->
+        <section id="contact-page" class="page-content">
+            <h1 class="text-4xl font-bold text-white mb-8 text-center">Contact Us</h1>
+
+            <div class="bg-gray-800 rounded-2xl shadow-xl p-8 mb-12 grid grid-cols-1 md:grid-cols-2 gap-10 border border-gray-700">
+                <!-- Contact Form -->
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-6">Send Us a Message</h2>
+                    <form id="contact-form" class="space-y-5">
+                        <div>
+                            <label for="name" class="block text-base font-medium text-gray-300 mb-1">Name</label>
+                            <input type="text" id="name" name="name" required
+                                   class="mt-1 block w-full px-4 py-2 border border-gray-600 bg-gray-900 text-white rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-base">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-base font-medium text-gray-300 mb-1">Email</label>
+                            <input type="email" id="email" name="email" required
+                                   class="mt-1 block w-full px-4 py-2 border border-gray-600 bg-gray-900 text-white rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-base">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-base font-medium text-gray-300 mb-1">Message</label>
+                            <textarea id="message" name="message" rows="6" required
+                                      class="mt-1 block w-full px-4 py-2 border border-gray-600 bg-gray-900 text-white rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-base"></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary bg-green-600 hover:bg-green-700">
+                            Send Message
+                        </button>
+                    </form>
+                    <!-- Message Box for form submission feedback -->
+                    <div id="form-message" class="mt-5 p-4 rounded-lg text-base hidden"></div>
+                </div>
+
+                <!-- Contact Information -->
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-6">Our Information</h2>
+                    <div class="space-y-4 text-gray-300 text-lg">
+                        <p class="flex items-center">
+                            <svg class="w-7 h-7 mr-3 text-indigo-400" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg>
+                            11950 Perry Road F, Houston, TX 77064
+                        </p>
+                        <p class="flex items-center">
+                            <svg class="w-7 h-7 mr-3 text-indigo-400" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.46.57 3.57.12.35.03.75-.25 1.02l-2.2 2.2z"/></svg>
+                            832-688-5098
+                        </p>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-white mb-4 mt-8">Business Hours</h3>
+                    <ul class="text-gray-300 text-lg space-y-2">
+                        <li>Monday - Friday: 8:00 AM - 6:00 PM</li>
+                        <li>Saturday: 9:00 AM - 3:00 PM</li>
+                        <li>Sunday: Closed</li>
+                    </ul>
+
+                    <h3 class="text-2xl font-bold text-white mb-4 mt-8">Towing Information</h3>
+                    <div class="space-y-2 text-gray-300 text-lg">
+                        <p class="flex items-center">
+                            <svg class="w-7 h-7 mr-3 text-indigo-400" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.46.57 3.57.12.35.03.75-.25 1.02l-2.2 2.2z"/></svg>
+                            Walters Towing: 832-643-3560 (Ask for Walter)
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map Placeholder -->
+            <div class="bg-gray-800 rounded-2xl shadow-xl p-8 mt-12 border border-gray-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Find Us on the Map</h2>
+                <div class="h-80 bg-gray-700 rounded-lg flex items-center justify-center text-gray-400 text-lg overflow-hidden">
+                    <!-- Google Map Embed - Updated for 11950 Perry Road F, Houston, TX 77064 -->
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3460.677271424364!2d-95.53935212351235!3d29.83279907498759!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8640c6c7475f42c3%3A0xc3f3a1d9b3d077b!2s11950%20Perry%20Rd%20F%2C%20Houston%2C%20TX%2077064%2C%20USA!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
+                        width="100%"
+                        height="100%"
+                        style="border:0;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-10 rounded-t-2xl shadow-2xl mt-12">
+        <div class="container mx-auto px-4 text-center md:text-left grid grid-cols-1 md:grid-cols-4 gap-10">
+            <!-- Company Info -->
+            <div>
+                <h3 class="text-xl font-bold text-indigo-300 mb-4">All N 1 Car Care</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Locally owned for over a decade, we combine generations of expertise with a commitment to honest, reliable service for your vehicle.</p>
+            </div>
+            <!-- Services Links -->
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Our Services</h3>
+                <ul class="text-gray-400 text-sm space-y-2">
+                    <li><a href="#services" class="hover:text-white transition duration-300">Full Service List</a></li>
+                    <li><a href="#services" class="hover:text-white transition duration-300">Brake Repair</a></li>
+                    <li><a href="#services" class="hover:text-white transition duration-300">Engine Diagnostics</a></li>
+                    <li><a href="#services" class="hover:text-white transition duration-300">AC & Heating</a></li>
+                </ul>
+            </div>
+            <!-- Quick Links -->
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                <ul class="text-gray-400 text-sm space-y-2">
+                    <li><a href="#home" class="hover:text-white transition duration-300">Home</a></li>
+                    <li><a href="#about" class="hover:text-white transition duration-300">About Us</a></li>
+                    <li><a href="#contact" class="hover:text-white transition duration-300">Contact Us</a></li>
+                </ul>
+            </div>
+            <!-- Follow Us -->
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Follow Us</h3>
+                <div class="flex justify-center md:justify-start space-x-5">
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300 transform hover:scale-110" aria-label="Facebook">
+                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.776-3.89 1.094 0 2.24.195 2.24.195v2.46h-1.26c-1.247 0-1.637.77-1.637 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300 transform hover:scale-110" aria-label="Instagram">
+                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.004 3.714.051.928.047 1.777.26 2.504.555.727.294 1.405.717 2.001 1.313a4.912 4.912 0 011.313 2.001c.295.727.508 1.576.555 2.504.047.93.051 1.284.051 3.714s-.004 2.784-.051 3.714c-.047.927-.26 1.777-.555 2.504a4.912 4.912 0 01-1.313 2.001c-.294.727-.717 1.405-1.313 2.001a4.912 4.912 0 01-2.001 1.313c-.727.295-1.576.508-2.504.555-.93.047-1.284.051-3.714.051s-2.784-.004-3.714-.051c-.928-.047-1.777-.26-2.504-.555a4.912 4.912 0 01-2.001-1.313 4.912 4.912 0 01-1.313-2.001c-.295-.727-.508-1.576-.555-2.504-.047-.93-.051-1.284-.051-3.714s.004-2.784.051-3.714c.047-.928.26-1.777.555-2.504a4.912 4.912 0 011.313-2.001c.294-.727.717-1.405 1.313-2.001a4.912 4.912 0 012.001-1.313c.727-.295 1.576-.508 2.504-.555C9.536 2.004 9.89 2 12.315 2zm0 2.155c-2.316 0-2.67.01-3.61.057-.803.04-1.474.22-1.99.42-.516.2-.953.475-1.348.87a3.273 3.273 0 00-.87 1.348c-.2.516-.38 1.187-.42 1.99-.047.94-.057 1.294-.057 3.61s.01 2.67.057 3.61c.04.803.22 1.474.42 1.99.2.516.475.953.87 1.348a3.273 3.273 0 001.348.87c.516.2 1.187.38 1.99.42.94.047 1.294.057 3.61.057s2.67-.01 3.61-.057c.803-.04 1.474-.22 1.99-.42.516-.2.953-.475 1.348-.87a3.273 3.273 0 00.87-1.348c.2-.516.38-1.187.42-1.99.047-.94.057-1.294.057-3.61s-.01-2.67-.057-3.61c-.04-.803-.22-1.474-.42-1.99a3.273 3.273 0 00-.87-1.348c-.516-.2-1.187-.38-1.99-.42-.94-.047-1.294-.057-3.61-.057zM12.315 6.844c-2.464 0-4.47 2.006-4.47 4.47 0 2.464 2.006 4.47 4.47 4.47 2.464 0 4.47-2.006 4.47-4.47 0-2.464-2.006-4.47-4.47-4.47zm0 7.337a2.867 2.867 0 010-5.733 2.867 2.867 0 010 5.733zm5.308-7.854a.79.79 0 00-1.58 0 .79.79 0 001.58 0z" clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="mt-10 text-center text-gray-500 text-sm border-t border-gray-700 pt-8">
+            Copyright &copy; 2025 All N 1 Car Care. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Function to show the selected page and update active navigation link
+        function showPage(pageId) {
+            // Hide all page content sections
+            document.querySelectorAll('.page-content').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Show the selected page content
+            const activePage = document.getElementById(pageId + '-page');
+            if (activePage) {
+                activePage.classList.add('active');
+            }
+
+            // Remove 'active' class from all nav links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // Add 'active' class to the clicked nav link
+            const currentNavLink = document.querySelector(`.nav-link[data-page="${pageId}"]`);
+            if (currentNavLink) {
+                currentNavLink.classList.add('active');
+            }
+
+            // Update URL hash without causing a page reload, and scroll to top
+            window.location.hash = pageId;
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // DOMContentLoaded ensures the script runs after the HTML is fully loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            // Event listeners for top navigation links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', (event) => {
+                    event.preventDefault(); // Prevent default anchor link behavior
+                    const pageId = link.dataset.page; // Get the page ID from data-page attribute
+                    if (pageId) {
+                        showPage(pageId);
+                    }
+                });
+            });
+
+            // Event listeners for buttons that navigate to pages (e.g., "Learn more about us" button)
+            document.querySelectorAll('button[data-nav-to]').forEach(button => {
+                button.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    const pageId = button.dataset.navTo;
+                    if (pageId) {
+                        showPage(pageId);
+                    }
+                });
+            });
+
+            // Accordion toggle functionality for Services page
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    header.classList.toggle('active');
+                    const content = header.nextElementSibling;
+                    if (content.style.maxHeight) {
+                        content.style.maxHeight = null; // Collapse
+                        content.style.paddingTop = '0';
+                        content.style.paddingBottom = '0';
+                        content.style.opacity = '0';
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + 'px'; // Expand
+                        content.style.paddingTop = '1rem'; // Add back padding
+                        content.style.paddingBottom = '1rem';
+                        content.style.opacity = '1';
+                    }
+                });
+            });
+
+            // Contact form submission handling
+            const contactForm = document.getElementById('contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(event) {
+                    event.preventDefault(); // Prevent default form submission
+
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const message = document.getElementById('message').value;
+                    const formMessage = document.getElementById('form-message');
+
+                    // Basic validation
+                    if (!name || !email || !message) {
+                        formMessage.textContent = 'Please fill in all fields.';
+                        formMessage.classList.remove('hidden', 'bg-green-100', 'text-green-700');
+                        formMessage.classList.add('bg-red-100', 'text-red-700');
+                        return;
+                    }
+
+                    // Simulate form submission
+                    console.log('Form Submitted:', { name, email, message });
+
+                    // Display success message
+                    formMessage.textContent = 'Thank you for your message! We will get back to you soon.';
+                    formMessage.classList.remove('hidden', 'bg-red-100', 'text-red-700');
+                    formMessage.classList.add('bg-green-100', 'text-green-700');
+
+                    // Clear form fields
+                    contactForm.reset();
+
+                    // Hide message after a few seconds
+                    setTimeout(() => {
+                        formMessage.classList.add('hidden');
+                    }, 5000);
+                });
+            }
+
+            // Handle initial page load based on URL hash or default to home
+            const initialHash = window.location.hash.substring(1); // Remove '#'
+            if (initialHash && document.getElementById(initialHash + '-page')) {
+                showPage(initialHash);
+            } else {
+                showPage('home'); // Default to home page
+            }
+        });
+    </script>
+</body>
+</html>
