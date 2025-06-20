@@ -355,19 +355,23 @@
             <div class="bg-gray-800 rounded-2xl shadow-xl p-8 mb-12 grid grid-cols-1 md:grid-cols-2 gap-10 border border-gray-700">
                 <div>
                     <h2 class="text-2xl font-bold text-white mb-6">Send Us a Message</h2>
-                    <form id="contact-form" class="space-y-5">
+                    <!-- FORM UPDATED FOR FORMSPREE -->
+                    <form id="contact-form" class="space-y-5" action="https://formspree.io/f/mvgrbqoe" method="POST">
                         <div>
                             <label for="name" class="block text-base font-medium text-gray-300 mb-1">Name</label>
+                            <!-- Added 'name' attribute for Formspree -->
                             <input type="text" id="name" name="name" required
                                    class="mt-1 block w-full px-4 py-2 border border-gray-600 bg-gray-900 text-white rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-base">
                         </div>
                         <div>
                             <label for="email" class="block text-base font-medium text-gray-300 mb-1">Email</label>
+                            <!-- Added 'name' attribute for Formspree -->
                             <input type="email" id="email" name="email" required
                                    class="mt-1 block w-full px-4 py-2 border border-gray-600 bg-gray-900 text-white rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-base">
                         </div>
                         <div>
                             <label for="message" class="block text-base font-medium text-gray-300 mb-1">Message</label>
+                            <!-- Added 'name' attribute for Formspree -->
                             <textarea id="message" name="message" rows="6" required
                                       class="mt-1 block w-full px-4 py-2 border border-gray-600 bg-gray-900 text-white rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-base"></textarea>
                         </div>
@@ -375,6 +379,7 @@
                             Send Message
                         </button>
                     </form>
+                    <!-- form-message div is kept but its content will now be handled by Formspree's default behavior (e.g., redirect to success page) -->
                     <div id="form-message" class="mt-5 p-4 rounded-lg text-base hidden"></div>
                 </div>
 
@@ -559,36 +564,40 @@
             const contactForm = document.getElementById('contact-form');
             if (contactForm) {
                 contactForm.addEventListener('submit', function(event) {
-                    event.preventDefault(); // Prevent default form submission
+                    // Prevent default submission IF you want to handle it with custom JS (e.g., Fetch API)
+                    // For Formspree direct submission, remove or comment out this line:
+                    // event.preventDefault();
 
+                    // Formspree will handle the submission directly.
+                    // You might still want client-side validation before Formspree, but the success/error
+                    // messages below are now redundant if Formspree handles redirection.
                     const name = document.getElementById('name').value;
                     const email = document.getElementById('email').value;
                     const message = document.getElementById('message').value;
                     const formMessage = document.getElementById('form-message');
 
-                    // Basic validation
+                    // Basic validation before Formspree submission (optional, Formspree also validates)
                     if (!name || !email || !message) {
                         formMessage.textContent = 'Please fill in all fields.';
                         formMessage.classList.remove('hidden', 'bg-green-100', 'text-green-700');
                         formMessage.classList.add('bg-red-100', 'text-red-700');
-                        return;
+                        return; // Stop here if validation fails
                     }
 
-                    // Simulate form submission
+                    // If validation passes, the form will submit to Formspree via its 'action' URL.
+                    // The following lines for console.log, success message, and form reset
+                    // are now commented out as Formspree handles the post-submission behavior,
+                    // often by redirecting to a success page.
+                    /*
                     console.log('Form Submitted:', { name, email, message });
-
-                    // Display success message
                     formMessage.textContent = 'Thank you for your message! We will get back to you soon.';
                     formMessage.classList.remove('hidden', 'bg-red-100', 'text-red-700');
                     formMessage.classList.add('bg-green-100', 'text-green-700');
-
-                    // Clear form fields
                     contactForm.reset();
-
-                    // Hide message after a few seconds
                     setTimeout(() => {
                         formMessage.classList.add('hidden');
                     }, 5000);
+                    */
                 });
             }
 
